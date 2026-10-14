@@ -1,0 +1,62 @@
+{
+  "name": "noir-music-player",
+  "version": "0.4.0",
+  "description": "A customizable desktop music player with in-app updates, searchable artist portraits, playlists and theme controls",
+  "main": "src/main.cjs",
+  "author": "NOIR",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win nsis",
+    "dist:dir": "electron-builder --dir",
+    "test:static": "node tests/static-check.cjs",
+    "dist:publish": "electron-builder --win nsis --publish always"
+  },
+  "dependencies": {
+    "music-metadata": "^12.2.0",
+    "electron-updater": "^6.8.9"
+  },
+  "devDependencies": {
+    "electron": "^44.7.2",
+    "electron-builder": "^26.17.0"
+  },
+  "build": {
+    "appId": "com.noir.musicplayer",
+    "productName": "NOIR Music Player",
+    "asar": true,
+    "files": [
+      "src/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "artifactName": "NOIR-Music-Player-Setup-${version}.${ext}",
+      "icon": "assets/noir-icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "zappytoast",
+        "repo": "NOIR-Music-Player",
+        "releaseType": "release"
+      }
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR_GITHUB_USERNAME/NOIR-Music-Player.git"
+  }
+}
